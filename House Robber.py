@@ -8,7 +8,6 @@ return the maximum amount of money you can rob tonight without alerting the poli
 """
 class Solution:
     def rob(self, nums: list[int]) -> int:
-        memo = {}
         def dp(i):
             if i == 0:
                 return nums[i]
@@ -17,4 +16,5 @@ class Solution:
             if i not in memo:
                 memo[i] = max(dp(i - 1), dp(i - 2) + nums[i])
             return memo[i]
+        memo = {}
         return dp(len(nums) - 1)
