@@ -34,3 +34,24 @@ def maximumScore_topDown(nums: list[int], multipliers: list[int]) -> int:
     n, m = len(nums), len(multipliers)
 
     return dp(0,0)
+
+
+def maximumScore_bottomUp(nums: list[int], multipliers: list[int]) -> int:
+    n, m = len(nums), len(multipliers)
+
+    dp = [0] * (m + 1)
+
+    for i in range(m - 1, -1, -1):
+        for left in range(i + 1):
+            multi = multipliers[i]
+            right = n - 1 - (i - left)
+            dp[left] = max(
+                multi * nums[left] + dp[left + 1],
+                multi * nums[right] + dp[left]
+                )
+
+    return dp[0]
+
+
+print(maximumScore_bottomUp(numbers, multis))
+print(maximumScore_topDown(numbers, multis))
